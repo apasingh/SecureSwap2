@@ -52,10 +52,19 @@ truffle migrate --network sepolia
 npm create vite@latest SecureSwap --template react-ts
 ```
 
+```
+npm install
+```
+
 2. Install dependencies
 
 ```
 npm install vite --save-dev
+```
+
+might need:
+```
+npm install @vitejs/plugin-react --save-dev
 ```
 
 Install Mantine which is a React components library. 
