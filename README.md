@@ -9,12 +9,12 @@ Aparna Singh, Maisha Miah, Ryan Chen
 
 1. Install Truffle. This is the package that does the deploying
 
-'''
+```
 npm install -g truffle
-'''
+```
 
 2. Run truffle to create the basic folders. Put your solidity contract into the contracts folder
 
-'''
+```
 truffle init 
-'''
+```
