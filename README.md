@@ -25,7 +25,7 @@ truffle init
 truffle compile
 ```
 
-4. Once the contract is compiled, it is ready to be deployed. Make sure you have a provider and a wallet - we used Infura as our provider, and hdwallet as our wallet. Add this information into a dotenv file, and call the information in the truffle-config.js file. We also need to install websockets - make sure to be in Node version 18 or this will not work when you try to deploy. We are also using ganache to deploy, so the port should be set to 7545 which is Ganache's default.
+4. Once the contract is compiled, it is ready to be deployed. Make sure you have a provider and a wallet - we used Infura as our provider, and hdwallet as our wallet. Add this information into a dotenv file, and call the information in the truffle-config.js file. We also need to install websockets - make sure to be in Node version 18 or this will not work when you try to deploy. We are also using Ganache to deploy, so the port should be set to whatever Ganache says -> in our case this is port 8000.
 
 ```
 npm install @truffle/hdwallet-provider
@@ -43,3 +43,36 @@ nvm use 18
 ```
 truffle migrate --network sepolia
 ```
+
+## Once the Contract is Deployed
+
+1. Use vite to connect the frontend with the contract. Run the following code, then choose react, and choose TypeScript
+
+```
+npm create vite@latest SecureSwap --template react-ts
+```
+
+2. Install dependencies
+
+```
+npm install vite --save-dev
+```
+
+Install Mantine which is a React components library. 
+
+```
+npm install @mantine/hooks @mantine/core @mantine/form
+```
+
+For style in Mantine:
+
+```
+npm install normalize.css
+```
+
+3. To Connect to MetaMask and to create hooks we use the useDapp library. Make sure to config in main.tsx.
+
+```
+npm install @usedapp/core ethers
+```
+

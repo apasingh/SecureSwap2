@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: GPL-3.0
-// pragma solidity >=0.4.0 <0.9.0;
+//SPDX-License-Identifier: GPL - 3.0
+
 pragma solidity ^0.8.0;
 
 contract SecureSwap {
@@ -86,7 +86,7 @@ contract SecureSwap {
       Product storage product = products[_productId];
       require(product.seller != address(0), "Product does not exist");
       require(product.isSold == false, "Product already sold");
-      require(msg.sender != product.seller, "Buyer cannot be the seller");
+      //require(msg.sender != product.seller, "Buyer cannot be the seller");
 
       // Transfer the product price from the buyer to the contract
       require(msg.value == product.price, "Send exact product price");
