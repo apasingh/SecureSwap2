@@ -1,5 +1,6 @@
 import { Button, Group, Modal, Space, TextInput } from "@mantine/core";
 import {useForm} from "@mantine/form";
+import { useListProduct } from "../../../hooks/ListProduct";
 
 export type ProductCreationModelProps = {
     opened: boolean;
@@ -17,7 +18,10 @@ export const ProductCreationModel = ({opened, onClose}: ProductCreationModelProp
         }
     });
 
+    const { loading, success, error, send } = useListProduct();
+
     const handleSubmit = async (values: typeof form.values) =>{
+        await send(values.description, values.price, values.sellerDeposit);
         console.log(values);
     }
     
