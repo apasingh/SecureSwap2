@@ -24,3 +24,22 @@ truffle init
 ```
 truffle compile
 ```
+
+4. Once the contract is compiled, it is ready to be deployed. Make sure you have a provider and a wallet - we used Infura as our provider, and hdwallet as our wallet. Add this information into a dotenv file, and call the information in the truffle-config.js file. We also need to install websockets - make sure to be in Node version 18 or this will not work when you try to deploy. We are also using ganache to deploy, so the port should be set to 7545 which is Ganache's default.
+
+```
+npm install @truffle/hdwallet-provider
+```
+```
+npm install uws
+```
+
+if not already,
+```
+nvm use 18
+```
+
+5. Deploy the contract on the sepolia testnet.
+```
+truffle migrate --network sepolia
+```
