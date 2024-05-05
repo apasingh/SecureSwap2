@@ -10,7 +10,7 @@ function App() {
     <div className="App">
 
     <div className='header' style={{ height: 60, paddingLeft: 'x1', display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div><Title> SecureSwap </Title></div>
+        <div><Title style={{color:'#33443C'}}> SecureSwap </Title></div>
         <div><WalletConnect/></div>
     </div>
 
