@@ -1,35 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Container, Title} from '@mantine/core';
+import { WalletInstallation } from "./components/organisms/WalletInstallation";
+import { WalletConnect } from "./components/organisms/WalletConnect";
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { ethereum } = window as any;
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+
+    <div className='header' style={{ height: 60, paddingLeft: 'x1', display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div><Title> SecureSwap </Title></div>
+        <div><WalletConnect/></div>
+    </div>
+
+    {!ethereum ? (
+      <Container p="lg">
+        <WalletInstallation />
+      </Container>
+    ) : null };
+  </div>
+);
 }
 
 export default App
