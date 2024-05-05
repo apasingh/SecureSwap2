@@ -85,3 +85,14 @@ npm install normalize.css
 npm install @usedapp/core ethers
 ```
 
+## To get the smart contract to interact with the website
+
+1. Create hooks that contain the smart contract address, and the ABI.
+
+
+### For ListProduct specifically, how the hooks worked :
+2. Call the function of the smart contract you want to interact with, also in the hooks. We did this in our ListProduct folder in /secureswap/src/hooks . Make sure the name of the function you call is the same as in your smart contract.
+
+3. In the ProductCreationModel folder in /components/organisms, we then import all the variables from our hooks we wish to use. This was loading, success, error, and send. Then we can edit the handleSubmit function so that it awaits for a response from the form we made. 
+
+4. To help with testing, keep in mind: 100,000,000,000,000 wei = 0.1 ETH .
