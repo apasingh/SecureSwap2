@@ -13,8 +13,14 @@ Aparna Singh, Maisha Miah, Ryan Chen
 npm install -g truffle
 ```
 
-2. Run truffle to create the basic folders. Put your solidity contract into the contracts folder
+2. Run truffle to create the basic folders. Put the solidity contract into the contracts folder
 
 ```
 truffle init 
+```
+
+3. Compiles the solidity contract. The config will hold any errors if there are any. the version is usually the issue, check compilers, solc, version. Change to version 0.8.0 for our solidity contract.
+
+```
+truffle compile
 ```
