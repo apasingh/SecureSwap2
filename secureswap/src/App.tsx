@@ -1,7 +1,8 @@
-import { Container, Title} from '@mantine/core';
+import { Container, Title } from '@mantine/core';
 import { WalletInstallation } from "./components/organisms/WalletInstallation";
 import { WalletConnect } from "./components/organisms/WalletConnect";
 import './App.css'
+import { ProductList } from './components/organisms/ProductList';
 
 function App() {
   const { ethereum } = window as any;
@@ -18,9 +19,9 @@ function App() {
       <Container p="lg">
         <WalletInstallation />
       </Container>
-    ) : null };
+    ) : <ProductList/> };
   </div>
 );
-}
+};
 
 export default App
