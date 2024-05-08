@@ -38,8 +38,8 @@ export const ProductCreationModel = ({opened, onClose}: ProductCreationModelProp
         <form onSubmit={form.onSubmit(handleSubmit)}>
             <TextInput label="Product Description" placeholder="description" {...form.getInputProps("description")}/>
             <Space h="md"/>
-            <TextInput required label="List Price" placeholder="0.0001" {...form.getInputProps("price")}/>
-            <TextInput required label="Deposit" placeholder="greater than list price" {...form.getInputProps("sellerDeposit")}/>
+            <TextInput required label="List Price (in Wei)" placeholder="10" {...form.getInputProps("price")}/>
+            <TextInput required label="Deposit (in Wei)" placeholder="greater than list price" {...form.getInputProps("sellerDeposit")}/>
             
             {
                 !!error && (

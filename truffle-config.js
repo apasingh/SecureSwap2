@@ -46,21 +46,7 @@
 
 // const HDWalletProvider = require('@truffle/hdwallet-provider');
 
-// const WebSocket = require('ws');
-require('dotenv').config();
-const { MNEMONIC, PROJECT_ID } = process.env;
-
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-
-
 module.exports = {
-  networks: {
-    sepolia: {
-      host: "127.0.0.1",     // Localhost (default: none)
-      port: 8000,            // Standard Ethereum port (default: none)
-      network_id: "*",       // Any network (default: none)
-      // Other optional configurations...
-    }
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -71,7 +57,7 @@ module.exports = {
    * $ truffle test --network <network-name>
    */
 
-  //networks: {
+  networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
     // You should run a client (like ganache, geth, or parity) in a separate terminal
@@ -120,7 +106,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.0",      // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.21",      // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
