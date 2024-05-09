@@ -32,6 +32,7 @@ export const ProductCreationModel = ({opened, onClose}: ProductCreationModelProp
         event?.preventDefault(); // Prevent default form submission behavior
         console.log(values);
         await send(values.description, StrToPrice(values.price), StrToPrice(values.sellerDeposit));
+        // await send(values.description, values.price, values.sellerDeposit);
     };
     
     return <Modal opened={opened} onClose={onClose} title="Create a new Product">
