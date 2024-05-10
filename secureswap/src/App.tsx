@@ -7,7 +7,7 @@ import { HeaderTabs } from './components/organisms/HeaderTabs';
 import {useProducts} from "./hooks/Products"; 
 import { ERC20Interface, Falsy, useCall } from "@usedapp/core";
 import { Contract } from "ethers";
-import { WithdrawStake } from "./components/organisms/WithdrawStake";
+// import { WithdrawStake } from "./components/organisms/WithdrawStake";
 
 
 function useTokenBalance(
@@ -75,7 +75,7 @@ function App() {
         {!ethereum ? <WalletInstallation /> : (
           <>
             <ProductList products={products} />
-            <WithdrawStake />
+            {/* <WithdrawStake /> */}
           </>
         )}
       </Container>
