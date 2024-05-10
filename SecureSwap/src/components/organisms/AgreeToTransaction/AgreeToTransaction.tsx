@@ -1,35 +1,34 @@
 import { Button, Card, Grid, Text } from "@mantine/core";
 import { useEthers } from "@usedapp/core";
 import { useState } from "react";
-import { TransactionItem } from "../../../hooks/Transactions/Transactions"; // transaciton needs to be set up
+import { PurchaseProductItem } from "../../../hooks/pathToPurchaseProduct";  // Correct import path for the product item
 import { AgreeToTransactionModal } from "../AgreeToTransactionModal";
 
-export type TransactionListProps = {
-  transactions: TransactionItem[];
+export type AgreeToTransactionProps = {
+  products: PurchaseProductItem[];
 };
 
-export const AgreeToTransaction = ({ transactions }: TransactionListProps) => {
-  const [transactionModalOpened, setTransactionModalOpened] = useState(false);
+export const AgreeToTransaction = ({ products }: AgreeToTransactionProps) => {
+  const [modalOpened, setModalOpened] = useState(false);
   const { account, chainId } = useEthers();
 
-  console.log("Number of Transactions: " + transactions.length);
+  console.log("Number of Products Available for Purchase: " + products.length);
 
   return (
     <>
       <Grid>
-        {transactions.map((transaction, index) => (
+        {products.map((product, index) => (
           <Grid.Col span={4} key={index}>
             <Card shadow="sm">
-              <Text>Transaction #{transaction.id}</Text>
-              <Text>Product ID: {transaction.productId}</Text>
-              <Text>Value: {transaction.value}</Text>
-              <Text>Status: {transaction.status}</Text>
+              <Text>Product #{product.productId}</Text>
+              <Text>Price: {product.price}</Text>
+              <Text>Available: {product.available ? "Yes" : "No"}</Text>
             </Card>
           </Grid.Col>
         ))}
       </Grid>
       <Button
-        onClick={() => setTransactionModalOpened(true)}
+        onClick={() => setModalOpened(true)}
         variant="light"
         radius="xl"
         disabled={!account || chainId !== 1} // Set your desired chainId for production
@@ -43,10 +42,9 @@ export const AgreeToTransaction = ({ transactions }: TransactionListProps) => {
       </Button>
 
       <AgreeToTransactionModal
-        opened={transactionModalOpened}
-        onClose={() => setTransactionModalOpened(false)}
+        opened={modalOpened}
+        onClose={() => setModalOpened(false)}
       />
     </>
   );
 };
-
