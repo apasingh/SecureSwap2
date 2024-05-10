@@ -1,26 +1,24 @@
 import { Button, Group, Modal, Space, TextInput, Text } from "@mantine/core";
 import {useForm} from "@mantine/form";
-import { useListProduct } from "../../../hooks/ListProduct";
-import { StrToPrice } from "../../../utils/PriceUtils";
 import { FormEvent, useEffect } from "react";
+import { DisputeTransaction } from "../../../hooks/DisputeTransaction";
 
-export type ProductCreationModelProps = {
+export type DisputeModelProps = {
     opened: boolean;
     onClose: () => void;
 }
 
-export const ProductCreationModel = ({opened, onClose}: ProductCreationModelProps) => {
+export const DisputeTransactionModel = ({opened, onClose}: DisputeModelProps) => {
     //will be open if the prop is open, on close we will tell the parents it wants to be closed
 
     const form = useForm({
         initialValues:{
-            description: "",
-            price: "",
-            sellerDeposit: "",
+            _productId: "",
+            _reason: "",
         }
     });
 
-    const { loading, success, error, send } = useListProduct();
+    const { loading, success, error, send } = DisputeTransaction();
 
     useEffect(() => {
         if (success) {
@@ -31,17 +29,14 @@ export const ProductCreationModel = ({opened, onClose}: ProductCreationModelProp
     const handleSubmit = async (values: typeof form.values, event: FormEvent<HTMLFormElement> | undefined) =>{
         event?.preventDefault(); // Prevent default form submission behavior
         console.log(values);
-        await send(values.description, StrToPrice(values.price), StrToPrice(values.sellerDeposit));
-        // await send(values.description, values.price, values.sellerDeposit);
+        await send(values._productId, values._reason);
+        // await send(values._productId);
     };
     
-    return <Modal opened={opened} onClose={onClose} title="List a New Product">
+    return <Modal opened={opened} onClose={onClose} title="Unhappy? Dispute a Transaction">
         <form onSubmit={form.onSubmit(handleSubmit)}>
-            <TextInput label="Product Description" placeholder="description" {...form.getInputProps("description")}/>
-            <Space h="md"/>
-            <TextInput required label="List Price (in Wei)" placeholder="10" {...form.getInputProps("price")}/>
-            <TextInput required label="Deposit (in Wei)" placeholder="greater than list price" {...form.getInputProps("sellerDeposit")}/>
-            
+            <TextInput required label="ProductId" placeholder="01" {...form.getInputProps("_productId")}/>
+            <TextInput label="Reason" placeholder="torn" {...form.getInputProps("_reason")}/>
             {
                 !!error && (
                     <>
@@ -50,9 +45,8 @@ export const ProductCreationModel = ({opened, onClose}: ProductCreationModelProp
                     </>
                 )
             }
-
             <Group>
-                <Button type="submit" loading={loading}> List </Button>
+                <Button type="submit" loading={loading}> DisputeTransaction </Button>
             </Group>
         </form>
     </Modal>
