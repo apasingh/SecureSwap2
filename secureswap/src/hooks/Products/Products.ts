@@ -13,7 +13,7 @@ export type ProductItem = {
 export const useProducts = () => {
   const logs = useLogs({
     contract,
-    event: "NewFloor",
+    event: "ProductListed",
     args: [null],
   });
 
@@ -23,7 +23,7 @@ export const useProducts = () => {
         const products: ProductItem = {
             description: log.data.description, 
             price: log.data.price, 
-            sellerDeposit: log.data.deposit 
+            sellerDeposit: log.data.deposit, 
         };
         return products;
       }) || []

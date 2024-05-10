@@ -12,7 +12,8 @@ export const ProductList = ({ products }: ProductListProps) => {
   const [productCreationOpened, setProductCreationOpened] = useState(false);
   const { account, chainId } = useEthers();
 
-  console.log("Number of Products: " + products.length); 
+  //console.log("Number of Products: " + products.length); 
+  console.log(products);
 
   return (
     <>
