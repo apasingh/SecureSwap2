@@ -4,6 +4,11 @@ import { WalletConnect } from "./components/organisms/WalletConnect";
 import './App.css'
 import { ProductList } from './components/organisms/ProductList';
 import { HeaderTabs } from './components/organisms/HeaderTabs';
+
+import { PurchaseProductModel } from './components/organisms/PurchaseProductModel';
+import { AgreeToTransactionModal } from './components/organisms/AgreeToTransactionModal'; 
+
+
 import {useProducts} from "./hooks/Products"; 
 import { ERC20Interface, Falsy, useCall } from "@usedapp/core";
 import { Contract } from "ethers";
