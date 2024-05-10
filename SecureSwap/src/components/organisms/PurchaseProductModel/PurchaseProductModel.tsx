@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, Text, NumberInput, Group } from '@mantine/core';
+import { useForm } from '@mantine/form';
 import { usePurchaseProduct } from '../../../hooks/PurchaseProduct'; // Ensure the path to your hooks is correct
 
-export interface PurchaseProductModalProps {
+export interface PurchaseProductModelProps {
     opened: boolean;
     onClose: () => void;
     productId: number;
@@ -10,7 +11,7 @@ export interface PurchaseProductModalProps {
     onPurchase: (productId: number, amount: string) => void;
 }
 
-export const PurchaseProductModal: React.FC<PurchaseProductModalProps> = ({
+export const PurchaseProductModel: React.FC<PurchaseProductModelProps> = ({
     opened,
     onClose,
     productId,
@@ -18,14 +19,26 @@ export const PurchaseProductModal: React.FC<PurchaseProductModalProps> = ({
     onPurchase,
 }) => {
     const { send, loading, error } = usePurchaseProduct();
-    const [amount, setAmount] = useState<string>('');
+    const form = useForm({
+        initialValues: {
+            amount: '',
+        },
+        validate: {
+            amount: (value) => (/^\d+$/.test(value) ? null : 'Invalid amount'),
+        },
+    });
 
-    const handlePurchase = async () => {
-        if (!amount) return; // Validate input to ensure it's not empty
+    useEffect(() => {
+        if (!opened) {
+            form.reset(); // Reset form when modal closes
+        }
+    }, [opened, form]);
 
+    const handlePurchase = async (values: typeof form.values) => {
+        const { amount } = values;
         try {
             await send(productId, { value: amount });
-            onPurchase(productId, amount); // Call the onPurchase function provided by props
+            onPurchase(productId, amount);
             onClose(); // Close modal on successful purchase
         } catch (err) {
             console.error('Error purchasing product:', err);
@@ -34,28 +47,29 @@ export const PurchaseProductModal: React.FC<PurchaseProductModalProps> = ({
 
     return (
         <Modal opened={opened} onClose={onClose} title="Confirm Purchase">
-            <Text>
-                Are you sure you want to purchase this product for {price} Wei?
-            </Text>
-            <NumberInput
-                label="Enter your amount in Wei"
-                placeholder="Amount in Wei"
-                value={amount}
-                onChange={(value) => setAmount(value.toString())}
-                required
-            />
-            <Group position="right" mt="md">
-                <Button onClick={handlePurchase} loading={loading} disabled={loading}>
-                    Confirm Purchase
-                </Button>
-            </Group>
-            {error && (
-                <Text color="red" size="sm">
-                    Error: {error}
+            <form onSubmit={form.onSubmit(handlePurchase)}>
+                <Text>
+                    Are you sure you want to purchase this product for {price} Wei?
                 </Text>
-            )}
+                <NumberInput
+                    required
+                    label="Enter your amount in Wei"
+                    placeholder="Amount in Wei"
+                    {...form.getInputProps('amount')}
+                />
+                <Group position="right" mt="md">
+                    <Button type="submit" loading={loading} disabled={loading || !form.values.amount}>
+                        Confirm Purchase
+                    </Button>
+                </Group>
+                {error && (
+                    <Text color="red" size="sm">
+                        Error: {error.message || 'An error occurred'}
+                    </Text>
+                )}
+            </form>
         </Modal>
     );
 };
 
-export default PurchaseProductModal;
+export default PurchaseProductModel;
