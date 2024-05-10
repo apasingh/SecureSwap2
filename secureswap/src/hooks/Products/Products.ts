@@ -13,7 +13,7 @@ export type ProductItem = {
 export const useProducts = () => {
   const logs = useLogs({
     contract,
-    event: "NewFloor",
+    event: "ProductListed",
     args: [null],
   });
 

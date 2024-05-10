@@ -6,6 +6,7 @@ import { FormEvent, useEffect } from "react";
 import { withdraw } from "../../../hooks/Withdraw";
 import { Contract } from "ethers";
 import { ERC20Interface, Falsy, useCall } from "@usedapp/core";
+import React from "react";
 
 
 export type WithdrawProps = {
@@ -13,33 +14,30 @@ export type WithdrawProps = {
     onClose: () => void;
 }
 
-function withdrawTokens(
-    tokenAddress: string | Falsy,
-    address: string | Falsy
-) {
-    const { value, error } =
-    useCall(
-        address &&
-        tokenAddress && {
-        contract: new Contract(tokenAddress, ERC20Interface), // instance of called contract
-        method: "balanceOf", // Method to be called
-        args: [address], // Method arguments - address to be checked for balance
-        }
-    ) ?? {};
+// function withdrawTokens(tokenAddress: string | Falsy, address: string | Falsy) {
+//     const { value, error } =
+//     useCall(
+//         address &&
+//         tokenAddress && {
+//         contract: new Contract(tokenAddress, ERC20Interface), // instance of called contract
+//         method: "withdrawStake", // Method to be called
+//         args: [address], // Method arguments - address to be checked for balance
+//         }
+//     ) ?? {};
     
-if(error) {
-    console.error(error.message)
-    return undefined
-}
-return value?.[0]
-  }
+//     if(error) {
+//         console.error(error.message)
+//         return undefined
+//     }
+//     return value?.[0]
+// }
 
   
 
-export const WithdrawStake = ({opened, onClose}: WithdrawProps) => {
+export const WithdrawStake = ({opened, onClose}: WithdrawProps) : any => {
     const form = useForm({
         initialValues:{
-            product_toWithdraw: ""
+            product_toWithdraw: "",
         }
     });
 

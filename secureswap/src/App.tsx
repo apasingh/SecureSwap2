@@ -7,6 +7,7 @@ import { HeaderTabs } from './components/organisms/HeaderTabs';
 import {useProducts} from "./hooks/Products"; 
 import { ERC20Interface, Falsy, useCall } from "@usedapp/core";
 import { Contract } from "ethers";
+import { WithdrawStake } from "./components/organisms/WithdrawStake";
 
 
 function useTokenBalance(
@@ -18,7 +19,7 @@ function useTokenBalance(
       address &&
         tokenAddress && {
           contract: new Contract(tokenAddress, ERC20Interface), // instance of called contract
-          method: "balanceOf", // Method to be called
+          method: "withdrawStake", // Method to be called
           args: [address], // Method arguments - address to be checked for balance
         }
     ) ?? {};
@@ -71,7 +72,12 @@ function App() {
       ) : <ProductList floors={floors}/> } */}
 
       <Container p="lg">
-        {!ethereum ? <WalletInstallation /> : <ProductList products={products} />}
+        {!ethereum ? <WalletInstallation /> : (
+          <>
+            <ProductList products={products} />
+            <WithdrawStake />
+          </>
+        )}
       </Container>
       
     </div>

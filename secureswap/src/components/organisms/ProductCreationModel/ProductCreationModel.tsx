@@ -3,6 +3,7 @@ import {useForm} from "@mantine/form";
 import { useListProduct } from "../../../hooks/ListProduct";
 import { StrToPrice } from "../../../utils/PriceUtils";
 import { FormEvent, useEffect } from "react";
+import React from "react";
 
 export type ProductCreationModelProps = {
     opened: boolean;
